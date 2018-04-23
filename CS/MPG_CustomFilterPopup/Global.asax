@@ -1,0 +1,1 @@
+<%@ Application Codebehind="Global.asax.cs" Inherits="MPG_CustomFilterPopup.MvcApplication" Language="C#" %>

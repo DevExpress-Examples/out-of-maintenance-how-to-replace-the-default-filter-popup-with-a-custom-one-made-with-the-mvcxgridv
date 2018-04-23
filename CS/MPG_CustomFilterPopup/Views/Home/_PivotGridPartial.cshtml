@@ -1,0 +1,38 @@
+@{
+    PivotGridSettings settings = ViewBag.PivotGridSettings;
+    settings.SetHeaderTemplateContent(c => {
+        MVCxPivotGrid pivotGrid = (MVCxPivotGrid)c.NamingContainer;
+
+        HtmlTextWriter writer = new HtmlTextWriter(ViewContext.Writer);
+        var fieldHeaderTable = c.CreateHeader();
+
+
+        if (c.Field.Visible && c.Field.Area != DevExpress.XtraPivotGrid.PivotArea.DataArea && c.Field.Options.AllowFilter != DevExpress.Utils.DefaultBoolean.False) {
+            string themeName = "";
+            if (String.IsNullOrEmpty(pivotGrid.Theme))
+                themeName = DevExpress.Web.ASPxWebControl.GlobalTheme;
+            else
+                themeName = pivotGrid.Theme;
+
+            var myFilterButton = new System.Web.UI.HtmlControls.HtmlGenericControl("div");
+            myFilterButton.Attributes["OnClick"] = string.Format(@"onCustomFilterClick(this, '{0}', '{1}' )", c.Field.ID, c.Field.Caption);
+
+
+            string themeSufix = String.IsNullOrEmpty(themeName) ? string.Empty : "_" + themeName;
+            string cssClassFS = c.Field.FilterValues.HasFilter ? "dxPivotGrid_pgFilterButtonActive{0}" : "dxPivotGrid_pgFilterButton{0}";
+            myFilterButton.Attributes["class"] = String.Format(cssClassFS, themeSufix);
+
+            TableCell filterButtonCell = new TableCell();
+            filterButtonCell.Width = Unit.Pixel(1);
+            filterButtonCell.Controls.Add(myFilterButton);
+            TableCell defaultFilterCell = fieldHeaderTable.Rows[0].Cells[fieldHeaderTable.Rows[0].Cells.Count - 1];
+            fieldHeaderTable.Rows[0].Cells.Remove(defaultFilterCell);
+            fieldHeaderTable.Rows[0].Cells.Add(filterButtonCell);
+        }
+        fieldHeaderTable.RenderControl(writer);
+    });
+}
+
+@Html.DevExpress().PivotGrid( settings ).Bind(Model).GetHtml()
+
+ 
