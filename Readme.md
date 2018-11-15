@@ -1,3 +1,12 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [HomeController.cs](./CS/MPG_CustomFilterPopup/Controllers/HomeController.cs)
+* [CustomFilterItem.cs](./CS/MPG_CustomFilterPopup/Models/CustomFilterItem.cs)
+* [_GridViewPartial.cshtml](./CS/MPG_CustomFilterPopup/Views/Home/_GridViewPartial.cshtml)
+* [_PivotGridPartial.cshtml](./CS/MPG_CustomFilterPopup/Views/Home/_PivotGridPartial.cshtml)
+* [Index.cshtml](./CS/MPG_CustomFilterPopup/Views/Home/Index.cshtml)
+<!-- default file list end -->
 # How to replace the default Filter Popup with a custom one made with the MVCxGridView
 
 
