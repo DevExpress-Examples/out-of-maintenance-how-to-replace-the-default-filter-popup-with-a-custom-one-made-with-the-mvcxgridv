@@ -86,30 +86,29 @@ namespace MPG_CustomFilterPopup.Controllers {
             settings.Name = "PivotGrid";
             settings.CallbackRouteValues = new { Controller = "Home", Action = "PivotGridPartial" };
             settings.CustomActionRouteValues = new { Controller = "Home", Action = "PivotGridCustomPartial" };
-
+            settings.OptionsData.DataProcessingEngine = PivotDataProcessingEngine.Optimized;
             settings.Fields.Add(field => {
                 field.ID = "fieldCountry";
                 field.Area = PivotArea.RowArea;
-                field.FieldName = "Country";
+                field.DataBinding = new DataSourceColumnBinding("Country");
                 field.Caption = "Country";
             });
             settings.Fields.Add(field => {
                 field.ID = "fieldOrderDate";
                 field.Area = PivotArea.ColumnArea;
-                field.FieldName = "OrderDate";
+                field.DataBinding = new DataSourceColumnBinding("OrderDate", PivotGroupInterval.DateYear);
                 field.Caption = "OrderDate";
-                field.GroupInterval = PivotGroupInterval.DateYear;
             });
             settings.Fields.Add(field => {
                 field.ID = "fieldProductName";
                 field.Area = PivotArea.FilterArea;
-                field.FieldName = "ProductName";
+                field.DataBinding = new DataSourceColumnBinding("ProductName");
                 field.Caption = "ProductName";
             });
             settings.Fields.Add(field => {
                 field.ID = "fieldExtendedPrice";
                 field.Area = PivotArea.DataArea;
-                field.FieldName = "ExtendedPrice";
+                field.DataBinding = new DataSourceColumnBinding("ExtendedPrice");
                 field.Caption = "ExtendedPrice";
             });
 
